@@ -25,16 +25,25 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
     </p>
-
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
             'id',
             'title',
-            'created_at',
-            'updated_at',
-            'domain_id',
-            'server_id',
+            'created_at:datetime',
+            'updated_at:datetime',
+            [
+                'label' => 'Домен',
+                'value' => function ($model) {
+                    return \frontend\models\Domains::findOne($model->domain_id)->title;
+                },
+            ],
+            [
+                'label' => 'Сервер',
+                'value' => function ($model) {
+                    return \frontend\models\Servers::findOne($model->server_id)->title;
+                },
+            ],
         ],
     ]) ?>
 

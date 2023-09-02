@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\ArrayHelper;
 use yii\widgets\ActiveForm;
 
 /** @var yii\web\View $this */
@@ -14,13 +15,20 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'created_at')->textInput() ?>
+    <?php
 
-    <?= $form->field($model, 'updated_at')->textInput() ?>
+        $domains = \frontend\models\Domains::find()->select(['id', 'title'])->all();
+        $items = ArrayHelper::map($domains,'id','displayTitle');
+        $params = ['prompt' => 'Укажите домен сайта'];
+        echo $form->field($model, 'domain_id')->dropDownList($items,$params);
+    ?>
 
-    <?= $form->field($model, 'domain_id')->textInput() ?>
-
-    <?= $form->field($model, 'server_id')->textInput() ?>
+    <?php
+        $domains = \frontend\models\Servers::find()->select(['id', 'title'])->all();
+        $items = ArrayHelper::map($domains,'id','displayTitle');
+        $params = ['prompt' => 'Укажите cервер сайта'];
+        echo $form->field($model, 'server_id')->dropDownList($items,$params);
+    ?>
 
     <div class="form-group">
         <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>

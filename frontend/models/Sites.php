@@ -3,6 +3,7 @@
 namespace frontend\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "sites".
@@ -33,11 +34,18 @@ class Sites extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'created_at', 'updated_at'], 'required'],
+            [['title'], 'required'],
             [['created_at', 'updated_at', 'domain_id', 'server_id'], 'integer'],
             [['title'], 'string', 'max' => 12],
             [['domain_id'], 'exist', 'skipOnError' => true, 'targetClass' => Domains::class, 'targetAttribute' => ['domain_id' => 'id']],
             [['server_id'], 'exist', 'skipOnError' => true, 'targetClass' => Servers::class, 'targetAttribute' => ['server_id' => 'id']],
+        ];
+    }
+
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
         ];
     }
 
@@ -48,11 +56,11 @@ class Sites extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'title' => 'Title',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
-            'domain_id' => 'Domain ID',
-            'server_id' => 'Server ID',
+            'title' => 'Имя',
+            'created_at' => 'Создано',
+            'updated_at' => 'Обновлено',
+            'domain_id' => 'Домен',
+            'server_id' => 'Сервер',
         ];
     }
 
@@ -75,4 +83,5 @@ class Sites extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Servers::class, ['id' => 'server_id']);
     }
+
 }

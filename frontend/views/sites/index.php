@@ -31,10 +31,14 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'title',
-            'created_at',
-            'updated_at',
-            'domain_id',
-            //'server_id',
+            'created_at:datetime',
+            'updated_at:datetime',
+            [
+                'label' => 'Домен',
+                'value' => function ($model) {
+                    return \frontend\models\Domains::findOne($model->domain_id)->title;
+                },
+            ],
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Sites $model, $key, $index, $column) {

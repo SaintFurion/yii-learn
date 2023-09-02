@@ -52,10 +52,10 @@ class Servers extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'title' => 'Title',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
-            'ip_address' => 'Ip Address',
+            'title' => 'Имя',
+            'created_at' => 'Создано',
+            'updated_at' => 'Обновлено',
+            'ip_address' => 'Ip адрес',
         ];
     }
 
@@ -67,5 +67,10 @@ class Servers extends \yii\db\ActiveRecord
     public function getSites()
     {
         return $this->hasMany(Sites::class, ['server_id' => 'id']);
+    }
+
+    public function getDisplayTitle()
+    {
+        return $this->title;
     }
 }

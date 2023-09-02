@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use frontend\models\Domains;
 use frontend\models\Sites;
 use frontend\models\SitesSearch;
 use yii\web\Controller;
