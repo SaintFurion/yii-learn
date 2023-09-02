@@ -36,14 +36,17 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        /*
         'urlManager' => [
+            'class' => 'yii\web\UrlManager',
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'about' => 'site/about',
+                'contact' => 'site/contact',
+                'login' => 'site/login',
+                '' => 'site/index'
             ],
         ],
-        */
     ],
     'params' => $params,
 ];

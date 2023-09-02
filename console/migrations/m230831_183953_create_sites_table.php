@@ -19,8 +19,8 @@ class m230831_183953_create_sites_table extends Migration
         $this->createTable('{{%sites}}', [
             'id' => $this->primaryKey(),
             'title' => $this->string(12)->notNull(),
-            'created_at' => $this->datetime()->notNull(),
-            'updated_at' => $this->datetime(),
+            'created_at' => $this->integer()->notNull(),
+            'updated_at' => $this->integer()->notNull(),
             'domain_id' => $this->integer(),
             'server_id' => $this->integer(),
         ]);
@@ -37,7 +37,7 @@ class m230831_183953_create_sites_table extends Migration
             '{{%fk-sites-domain_id}}',
             '{{%sites}}',
             'domain_id',
-            '{{%domain}}',
+            '{{%domains}}',
             'id',
             'CASCADE'
         );
@@ -54,7 +54,7 @@ class m230831_183953_create_sites_table extends Migration
             '{{%fk-sites-server_id}}',
             '{{%sites}}',
             'server_id',
-            '{{%server}}',
+            '{{%servers}}',
             'id',
             'CASCADE'
         );
